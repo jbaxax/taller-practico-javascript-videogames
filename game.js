@@ -17,7 +17,7 @@ function setCanvasSize() {
   canvas.setAttribute('width', canvasSize);
   canvas.setAttribute('height', canvasSize);
   
-  elementsSize = (canvasSize / 10)-2;
+  elementsSize = (canvasSize / 10);
 
   startGame();
 }
@@ -26,11 +26,20 @@ function startGame() {
   console.log({ canvasSize, elementsSize });
 
   game.font = elementsSize + 'px Verdana';
-  game.textAlign = '';
+  game.textAlign = 'end';
 
-  for (let col = 0; col < 10; col++) {
-    for (let row = 1; row < 11; row++) {
-        game.fillText(emojis['X'],elementsSize*col,elementsSize*row)       
+const map = maps[2];
+const mapRows =  map.trim().split('\n');
+const mapRowCol = mapRows.map(row => row.trim().split(''))
+
+console.log({map,mapRows,mapRowCol});
+
+  
+  for (let row = 1; row <= 10; row++) {
+    for (let col = 1; col <= 10; col++) {
+      game.fillText(emojis[mapRowCol[row-1][col-1]], elementsSize * col, elementsSize * row);
     }
   }
+
+ 
 }
