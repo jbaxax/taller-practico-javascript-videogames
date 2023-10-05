@@ -1,5 +1,10 @@
 const canvas = document.querySelector('#game');
 const game = canvas.getContext('2d');
+const btnUp = document.querySelector('#up');
+const btnLeft = document.querySelector('#left');
+const btnRight = document.querySelector('#right');
+const btnDown = document.querySelector('#down');
+
 
 let canvasSize;
 let elementsSize;
@@ -37,10 +42,10 @@ console.log({map,mapRows,mapRowCols});
 mapRowCols.forEach((row,rowI) => {
   row.forEach((col,colI) =>{
     const emoji = emojis[col];
-    const posX = (elementsSize*(colI+1));
+    const posX = elementsSize*(colI+1);
     const posY = elementsSize*(rowI+1);
     game.fillText(emoji,posX,posY);
-    console.log({row,rowI,col,colI});
+    
   })
 });
   
@@ -52,3 +57,32 @@ mapRowCols.forEach((row,rowI) => {
 
  
 }
+window.addEventListener('keydown',moveByKeys);
+btnUp.addEventListener('click',moveUp);
+btnLeft.addEventListener('click',moveLeft);
+btnRight.addEventListener('click',moveRight);
+btnDown.addEventListener('click',moveDown);
+
+function moveByKeys(event){
+  if (event.key == 'ArrowUp') moveUp();
+  else if(event.key == 'ArrowLeft') moveLeft();
+  else if(event.key == 'ArrowRight') moveRight();
+  else if(event.key == 'ArrowDown') moveDown();  
+}
+
+function moveUp() {
+  console.log("Up");
+}
+
+function moveLeft() {
+  console.log("Left");
+}
+
+function moveRight(){
+  console.log("Right");
+}
+
+function moveDown(){
+  console.log("Down");
+}
+
