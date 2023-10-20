@@ -6,6 +6,9 @@ const btnRight = document.querySelector('#right');
 const btnDown = document.querySelector('#down');
 const spanLives = document.querySelector('#lives');
 const spanTime = document.querySelector('#time');
+const spanRecord = document.querySelector('#record'); 
+const pResult = document.querySelector('#result');
+
 
 let canvasSize;
 let elementsSize;
@@ -124,8 +127,25 @@ function levelFail(){
 }
 
 function gameWin() {
-  console.log("terminaste");
+  console.log("¡Terminaste el juego!");
   clearInterval(timeInterval);
+
+  const record_time = localStorage.getItem('record_time');
+  const playerTime =  Date.now()-timeStar;
+  if(record_time){    
+    if (record_time >=playerTime) {
+      localStorage.setItem('record_time',playerTime);
+      pResult.innerHTML="Superaste el record";
+   }else{
+      pResult.innerHTML="No superaste el record";
+    }
+  }else{
+    localStorage.setItem('record_time',playerTime);
+    pResult.innerHTML="Superate!";
+  }
+  console.log(record_time);
+
+ 
 }
 
 function showLives(){
@@ -139,8 +159,13 @@ function showLives(){
 }
 
 function showTime(){
-  spanTime.innerHTML = Date.now()-timeStar;
+  spanTime.innerHTML = Date.now()-timeStar;  
+  showRecord();
 }
+function showRecord(){
+  spanRecord.innerHTML = localStorage.getItem('record_time');  
+}
+
 function movePlayer() {
   const giftCollisionX = playerPosition.x.toFixed(3) == giftPosition.x.toFixed(3);
   const giftCollisionY = playerPosition.y.toFixed(3) == giftPosition.y.toFixed(3);
